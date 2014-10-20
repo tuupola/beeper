@@ -1,6 +1,6 @@
 # Beeper
 
-Generic pages for PHP 5.4+
+Generic pager for PHP 5.4+
 
 [![Author](http://img.shields.io/badge/author-@tuupola-blue.svg?style=flat-square)](https://twitter.com/tuupola)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
