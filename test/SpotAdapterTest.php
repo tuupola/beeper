@@ -26,11 +26,7 @@ class SpotAdapterTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        if (!class_exists("Spot\Mapper")) {
-            $this->markTestSkipped(
-                "Run composer install vlucas/spot to run Spot tests."
-            );
-        } else {
+        if (class_exists("Spot\Mapper")) {
             @unlink("/tmp/test.sqlite");
 
             $config = new \Spot\Config();
@@ -59,14 +55,20 @@ class SpotAdapterTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $config = new \Spot\Config();
-        $config->addConnection("sqlite", [
-            "path" => "/tmp/test.sqlite",
-            //"memory" => true,
-            "driver" => "pdo_sqlite"
-        ]);
-        $this->spot = new \Spot\Locator($config);
-        $this->mapper = $this->spot->mapper("Beeper\Test\Dragon");
+        if (!class_exists("Spot\Mapper")) {
+            $this->markTestSkipped(
+                "Run composer install vlucas/spot to run Spot tests."
+            );
+        } else {
+            $config = new \Spot\Config();
+            $config->addConnection("sqlite", [
+                "path" => "/tmp/test.sqlite",
+                //"memory" => true,
+                "driver" => "pdo_sqlite"
+            ]);
+            $this->spot = new \Spot\Locator($config);
+            $this->mapper = $this->spot->mapper("Beeper\Test\Dragon");
+        }
     }
 
     public function testShouldCount()
