@@ -18,8 +18,6 @@ $ composer require tuupola/beeper
 
 ## Usage
 
-You have your usual class with boilerplate mutators.
-
 ```php
 use Beeper\Adapter\ArrayAdapter;
 use Beeper\Beeper;
