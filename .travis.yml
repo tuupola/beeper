@@ -10,8 +10,8 @@ before_install:
 
 before_script:
     - travis_retry composer self-update
-    - travis_retry composer install --no-interaction --dev
-    - travis_retry composer require vlucas/spot2 --no-interaction --dev
+    - travis_retry composer install --no-interaction
+    - travis_retry composer require vlucas/spot2 --no-interaction
 
 script:
     - vendor/bin/phpunit --coverage-text --bootstrap vendor/autoload.php --coverage-clover=coverage.xml
