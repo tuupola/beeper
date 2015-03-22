@@ -35,6 +35,30 @@ class BeeperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($beeper->getSize(), 10);
     }
 
+    public function testShouldSetAndGetAdapterUsingMutators()
+    {
+        $adapter = new NullAdapter();
+        $beeper = new Beeper();
+        $beeper->setAdapter($adapter);
+        $this->assertInstanceOf("\Beeper\Adapter\NullAdapter", $beeper->getAdapter());
+    }
+
+    public function testShouldSetAndGetAdapterUsingMagicMethods()
+    {
+        $adapter = new NullAdapter();
+        $beeper = new Beeper();
+        $beeper->adapter($adapter);
+        $this->assertInstanceOf("\Beeper\Adapter\NullAdapter", $beeper->adapter());
+    }
+
+    public function testShouldSetAndGetAdapterUsingMagicProperties()
+    {
+        $adapter = new NullAdapter();
+        $beeper = new Beeper();
+        $beeper->adapter = $adapter;
+        $this->assertInstanceOf("\Beeper\Adapter\NullAdapter", $beeper->adapter);
+    }
+
     public function testShouldSetAndGetSizeUsingMutators()
     {
         $adapter = new NullAdapter();
@@ -89,32 +113,30 @@ class BeeperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($beeper->page, 2);
     }
 
-    public function testShouldSetAndGetTotalUsingMutators()
+    public function testShouldGetTotalUsingMutators()
     {
-        $adapter = new NullAdapter();
-        $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->getTotal(), 0);
-        $beeper->setTotal(100);
-        $this->assertEquals($beeper->getTotal(), 100);
+        $array = range(1, 12, 1);
+        $adapter = new ArrayAdapter($array);
+        $beeper = new Beeper(["adapter" => $adapter, "size" => 5, "page" => 1]);
+        $this->assertEquals($beeper->getTotal(), 12);
     }
 
-    public function testShouldSetAndGetTotalUsingMagicMethods()
+    public function testShouldGetTotalUsingMagicMethods()
     {
-        $adapter = new NullAdapter();
-        $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->total(), 0);
-        $beeper->total(100);
-        $this->assertEquals($beeper->total(), 100);
+        $array = range(1, 12, 1);
+        $adapter = new ArrayAdapter($array);
+        $beeper = new Beeper(["adapter" => $adapter, "size" => 5, "page" => 1]);
+        $this->assertEquals($beeper->total(), 12);
     }
 
-    public function testShouldSetAndGetTotalUsingMagicProperties()
+    public function testShouldTotalUsingMagicProperties()
     {
-        $adapter = new NullAdapter();
-        $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->total, 0);
-        $beeper->total = 100;
-        $this->assertEquals($beeper->total, 100);
+        $array = range(1, 12, 1);
+        $adapter = new ArrayAdapter($array);
+        $beeper = new Beeper(["adapter" => $adapter, "size" => 5, "page" => 1]);
+        $this->assertEquals($beeper->total, 12);
     }
+
     public function testShouldGetCurrentPage()
     {
         $array = range(1, 55, 1);
@@ -182,5 +204,45 @@ class BeeperTest extends \PHPUnit_Framework_TestCase
             }
             $this->assertEquals($page, range($start, $end, 1));
         }
+    }
+
+    public function testShouldValidateIterator()
+    {
+        $array = range(1, 55, 1);
+        $adapter = new ArrayAdapter($array);
+        $beeper = new Beeper(["adapter" => $adapter, "page" => 5]);
+        $this->assertTrue($beeper->valid());
+
+        $beeper->page(666);
+        $this->assertFalse($beeper->valid());
+    }
+
+    public function testEverythingShouldBeChainable()
+    {
+        $array = range(1, 55, 1);
+        $adapter = new ArrayAdapter($array);
+        $beeper = new Beeper();
+
+        $beeper
+            ->adapter($adapter)
+            ->size(20)
+            ->page(2);
+
+        $this->assertEquals($beeper->page(), 2);
+        $this->assertEquals($beeper->size(), 20);
+        $this->assertInstanceOf("\Beeper\Adapter\ArrayAdapter", $beeper->adapter());
+
+        $beeper
+            ->rewind()
+            ->next()
+            ->next();
+
+        $this->assertEquals($beeper->page(), 3);
+
+        $beeper
+            ->previous()
+            ->previous();
+
+        $this->assertEquals($beeper->page(), 1);
     }
 }

@@ -21,29 +21,20 @@ class Beeper implements \Iterator, \Countable
 {
     use \Witchcraft\MagicMethods;
     use \Witchcraft\MagicProperties;
+    use \Witchcraft\Hydrate;
 
-    private $options;
-    private $adapter;
-    private $total;
-    private $page; /* \Iterator already uses current() */
+    /* Bucket holds all properties */
+    private $bucket = [];
 
     public function __construct(array $options = [])
     {
-        /* Default options. */
-        $this->options = [
+        $defaults = [
             "page" => 1,
             "size" => 10
         ];
-
-        $this->adapter = $options["adapter"];
-        unset($options["adapter"]);
-
-        $this->options = array_merge($this->options, $options);
-
-        $this->page = $this->options["page"];
-        unset($this->options["page"]);
-
-        $this->total = $this->adapter->count();
+        $merged = array_merge($defaults, $options);
+        /* Fills the bucket */
+        $this->hydrate($merged);
     }
 
     public function get($page = null)
@@ -51,8 +42,8 @@ class Beeper implements \Iterator, \Countable
         if (null === $page) {
             $page = $this->page;
         }
-        $offset = ($page - 1) * $this->options["size"];
-        $limit = $this->options["size"];
+        $offset = ($page - 1) * $this->size();
+        $limit = $this->size();
         return $this->adapter->slice(["offset" => $offset, "limit" => $limit]);
     }
 
@@ -64,41 +55,46 @@ class Beeper implements \Iterator, \Countable
 
     public function getPage()
     {
-        return $this->page;
+        return $this->bucket["page"];
     }
 
     public function setPage($page)
     {
-        $this->page = $page;
+        $this->bucket["page"] = $page;
         return $this;
     }
 
     public function getTotal()
     {
-        return $this->total;
-    }
-
-    public function setTotal($total)
-    {
-        $this->total = $total;
+        return $this->adapter->count();
     }
 
     public function getSize()
     {
-        return $this->options["size"];
+        return $this->bucket["size"];
     }
 
     public function setSize($size)
     {
-        $this->options["size"] = $size;
+        $this->bucket["size"] = $size;
         return $this;
     }
 
+    public function getAdapter()
+    {
+        return $this->bucket["adapter"];
+    }
+
+    public function setAdapter(AdapterInterface $adapter)
+    {
+        $this->bucket["adapter"] = $adapter;
+        return $this;
+    }
 
     /* Countable */
     public function count()
     {
-        return (integer)ceil($this->total / $this->options["size"]);
+        return (integer)ceil($this->total() / $this->size());
     }
 
     /* Iterator */
@@ -112,7 +108,7 @@ class Beeper implements \Iterator, \Countable
     /* Return the key of the current element */
     public function key()
     {
-        return $this->page;
+        return $this->page();
     }
 
     /* Move forward to next element */
@@ -125,13 +121,13 @@ class Beeper implements \Iterator, \Countable
     /* Rewind the Iterator to the first element */
     public function rewind()
     {
-        $this->page = 1;
+        $this->page(1);
         return $this;
     }
 
     /* Checks if current position is valid */
     public function valid()
     {
-        return $this->page > 0 && $this->page <= $this->count();
+        return $this->page() > 0 && $this->page() <= $this->count();
     }
 }
