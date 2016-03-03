@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": "~5.4",
-        "tuupola/witchcraft": "~0.2"
+        "tuupola/witchcraft": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.3",
