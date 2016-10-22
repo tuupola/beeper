@@ -29,7 +29,8 @@ class SpotAdapter implements AdapterInterface
     public function count()
     {
         /* This works also with GROUP BY queries. */
-        return count($this->query->execute());
+        $query = clone $this->query;
+        return count($query->execute());
     }
 
     public function slice(array $options)
