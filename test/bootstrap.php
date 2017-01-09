@@ -3,7 +3,7 @@
 /*
  * This file is part of the Beeper package
  *
- * Copyright (c) 2014-2016 Mika Tuupola
+ * Copyright (c) 2014-2017 Mika Tuupola
  *
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
