@@ -32,6 +32,6 @@ class BeeperPaginatorAdapterTest extends \PHPUnit_Framework_TestCase
         $adapter = new ArrayAdapter($array);
         $beeper = new Beeper(["adapter" => $adapter]);
         $paginator = new BeeperPaginatorAdapter($beeper);
-        $this->assertInstanceOf(BeeperPaginatorAdapter::class, $paginator);
+        $this->assertInstanceOf("Beeper\Fractal\Pagination\BeeperPaginatorAdapter", $paginator);
     }
 }
