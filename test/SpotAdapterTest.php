@@ -17,8 +17,9 @@ namespace Test;
 
 use \Beeper\Adapter\SpotAdapter;
 use \Test\Dragon;
+use \PHPUnit\Framework\TestCase;
 
-class SpotAdapterTest extends \PHPUnit_Framework_TestCase
+class SpotAdapterTest extends TestCase
 {
 
     protected $spot;

@@ -18,8 +18,9 @@ namespace Test;
  use \Beeper\Beeper;
  use \Beeper\Adapter\NullAdapter;
  use \Beeper\Adapter\ArrayAdapter;
+ use \PHPUnit\Framework\TestCase; 
 
-class BeeperTest extends \PHPUnit_Framework_TestCase
+class BeeperTest extends TestCase
 {
 
     public function testShouldBeTrue()
