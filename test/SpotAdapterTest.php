@@ -15,16 +15,17 @@
 
 namespace Test;
 
-use \Beeper\Adapter\SpotAdapter;
-use \Test\Dragon;
+use Beeper\Adapter\SpotAdapter;
+use Test\Dragon;
+use PHPUnit\Framework\TestCase;
 
-class SpotAdapterTest extends \PHPUnit_Framework_TestCase
+class SpotAdapterTest extends TestCase
 {
 
     protected $spot;
     protected $mapper;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (class_exists("Spot\Mapper")) {
             @unlink("/tmp/test.sqlite");
@@ -48,12 +49,12 @@ class SpotAdapterTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         @unlink("/tmp/test.sqlite");
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!class_exists("Spot\Mapper")) {
             $this->markTestSkipped(

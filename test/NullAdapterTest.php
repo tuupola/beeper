@@ -15,9 +15,10 @@
 
 namespace Test;
 
-use \Beeper\Adapter\NullAdapter;
+use Beeper\Adapter\NullAdapter;
+use PHPUnit\Framework\TestCase;
 
-class NullAdapterTest extends \PHPUnit_Framework_TestCase
+class NullAdapterTest extends TestCase
 {
 
     public function testShouldCount()

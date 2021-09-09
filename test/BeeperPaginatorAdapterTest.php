@@ -18,8 +18,9 @@ namespace Test;
 use Beeper\Beeper;
 use Beeper\Adapter\ArrayAdapter;
 use Beeper\Fractal\Pagination\BeeperPaginatorAdapter;
+use PHPUnit\Framework\TestCase;
 
-class BeeperPaginatorAdapterTest extends \PHPUnit_Framework_TestCase
+class BeeperPaginatorAdapterTest extends TestCase
 {
     public function testShouldBeTrue()
     {
