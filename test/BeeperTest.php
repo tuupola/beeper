@@ -32,17 +32,8 @@ class BeeperTest extends TestCase
     {
         $adapter = new NullAdapter();
         $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->getPage(), 1);
-        $this->assertEquals($beeper->getSize(), 10);
-    }
-
-    public function testShouldSetAndGetSizeUsingMutators()
-    {
-        $adapter = new NullAdapter();
-        $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->getSize(), 10);
-        $beeper->setSize(5);
-        $this->assertEquals($beeper->getSize(), 5);
+        $this->assertEquals($beeper->page(), 1);
+        $this->assertEquals($beeper->size(), 10);
     }
 
     public function testShouldSetAndGetSizeUsingMagicMethods()
@@ -54,24 +45,6 @@ class BeeperTest extends TestCase
         $this->assertEquals($beeper->size(), 5);
     }
 
-    public function testShouldSetAndGetSizeUsingMagicProperties()
-    {
-        $adapter = new NullAdapter();
-        $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->size, 10);
-        $beeper->size = 5;
-        $this->assertEquals($beeper->size, 5);
-    }
-
-    public function testShouldSetAndGetPageUsingMutators()
-    {
-        $adapter = new NullAdapter();
-        $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->getPage(), 1);
-        $beeper->setPage(2);
-        $this->assertEquals($beeper->getPage(), 2);
-    }
-
     public function testShouldSetAndGetPageUsingMagicMethods()
     {
         $adapter = new NullAdapter();
@@ -79,24 +52,6 @@ class BeeperTest extends TestCase
         $this->assertEquals($beeper->page(), 1);
         $beeper->page(2);
         $this->assertEquals($beeper->page(), 2);
-    }
-
-    public function testShouldSetAndGetPageUsingMagicProperties()
-    {
-        $adapter = new NullAdapter();
-        $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->page, 1);
-        $beeper->page = 2;
-        $this->assertEquals($beeper->page, 2);
-    }
-
-    public function testShouldSetAndGetTotalUsingMutators()
-    {
-        $adapter = new NullAdapter();
-        $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->getTotal(), 0);
-        $beeper->setTotal(100);
-        $this->assertEquals($beeper->getTotal(), 100);
     }
 
     public function testShouldSetAndGetTotalUsingMagicMethods()
@@ -108,20 +63,12 @@ class BeeperTest extends TestCase
         $this->assertEquals($beeper->total(), 100);
     }
 
-    public function testShouldSetAndGetTotalUsingMagicProperties()
-    {
-        $adapter = new NullAdapter();
-        $beeper = new Beeper(["adapter" => $adapter]);
-        $this->assertEquals($beeper->total, 0);
-        $beeper->total = 100;
-        $this->assertEquals($beeper->total, 100);
-    }
     public function testShouldGetCurrentPage()
     {
         $array = range(1, 55, 1);
         $adapter = new ArrayAdapter($array);
         $beeper = new Beeper(["adapter" => $adapter]);
-        $beeper->setPage(2);
+        $beeper->page(2);
         $this->assertEquals($beeper->get(), range(11, 20, 1));
     }
 

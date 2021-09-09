@@ -19,30 +19,17 @@ use Beeper\Adapter\AdapterInterface;
 
 class Beeper implements \Iterator, \Countable
 {
-    use \Witchcraft\MagicMethods;
-    use \Witchcraft\MagicProperties;
-
     private $options;
     private $adapter;
     private $total;
+    private $size;
     private $page; /* \Iterator already uses current() */
 
     public function __construct(array $options = [])
     {
-        /* Default options. */
-        $this->options = [
-            "page" => 1,
-            "size" => 10
-        ];
-
         $this->adapter = $options["adapter"];
-        unset($options["adapter"]);
-
-        $this->options = array_merge($this->options, $options);
-
-        $this->page = $this->options["page"];
-        unset($this->options["page"]);
-
+        $this->page = $options["page"] ?? 1;
+        $this->size = $options["size"] ?? 10;
         $this->total = $this->adapter->count();
     }
 
@@ -51,8 +38,8 @@ class Beeper implements \Iterator, \Countable
         if (null === $page) {
             $page = $this->page;
         }
-        $offset = ($page - 1) * $this->options["size"];
-        $limit = $this->options["size"];
+        $offset = ($page - 1) * $this->size;
+        $limit = $this->size;
         return $this->adapter->slice(["offset" => $offset, "limit" => $limit]);
     }
 
@@ -62,43 +49,37 @@ class Beeper implements \Iterator, \Countable
         return $this;
     }
 
-    public function getPage()
+    public function page($page = null)
     {
-        return $this->page;
-    }
-
-    public function setPage($page)
-    {
+        if (null === $page) {
+            return $this->page;
+        }
         $this->page = $page;
         return $this;
     }
 
-    public function getTotal()
+    public function total($total = null)
     {
-        return $this->total;
-    }
-
-    public function setTotal($total)
-    {
+        if (null === $total) {
+            return $this->total;
+        }
         $this->total = $total;
-    }
-
-    public function getSize()
-    {
-        return $this->options["size"];
-    }
-
-    public function setSize($size)
-    {
-        $this->options["size"] = $size;
         return $this;
     }
 
+    public function size($size = null)
+    {
+        if (null === $size) {
+            return $this->size;
+        }
+        $this->size = $size;
+        return $this;
+    }
 
     /* Countable */
     public function count()
     {
-        return (integer)ceil($this->total / $this->options["size"]);
+        return (integer)ceil($this->total / $this->size);
     }
 
     /* Iterator */
