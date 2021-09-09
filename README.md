@@ -4,7 +4,7 @@ Generic pager for PHP 5.4+
 
 [![Latest Version](https://img.shields.io/packagist/v/tuupola/beeper.svg?style=flat-square)](https://packagist.org/packages/tuupola/beeper)
 [![Packagist](https://img.shields.io/packagist/dm/tuupola/beeper.svg)](https://packagist.org/packages/tuupola/beeper)
-[![Build Status](https://img.shields.io/github/workflow/status/tuupola/beeper/Tests/3.x?style=flat-square)](https://github.com/tuupola/beeper/actions)
+[![Build Status](https://img.shields.io/github/workflow/status/tuupola/beeper/Tests/master?style=flat-square)](https://github.com/tuupola/beeper/actions)
 [![Coverage](https://img.shields.io/codecov/c/github/tuupola/beeper.svg?style=flat-square)](https://codecov.io/github/tuupola/beeper)
 
 ## Install
