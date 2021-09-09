@@ -38,7 +38,7 @@ class SpotAdapterTest extends TestCase
             ]);
             $spot = new \Spot\Locator($config);
             $mapper = $spot->mapper("Beeper\Test\Dragon");
-            var_dump($mapper->migrate());
+            $mapper->migrate();
             for ($i = 1; $i <= 55; ++$i) {
                 $color = $i % 2 ? "black" : "red";
                 $dragon = $mapper->create([
