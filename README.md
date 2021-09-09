@@ -2,11 +2,10 @@
 
 Generic pager for PHP 5.4+
 
-[![Author](http://img.shields.io/badge/author-@tuupola-blue.svg?style=flat-square)](https://twitter.com/tuupola)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
-[![Build Status](https://img.shields.io/travis/tuupola/beeper/master.svg?style=flat-square)](https://travis-ci.org/tuupola/beeper)
-[![HHVM Status](https://img.shields.io/hhvm/tuupola/beeper.svg?style=flat-square)](http://hhvm.h4cc.de/package/tuupola/beeper)
-[![Coverage](http://img.shields.io/codecov/c/github/tuupola/beeper.svg?style=flat-square)](https://codecov.io/github/tuupola/beeper)
+[![Latest Version](https://img.shields.io/packagist/v/tuupola/beeper.svg?style=flat-square)](https://packagist.org/packages/tuupola/beeper)
+[![Packagist](https://img.shields.io/packagist/dm/tuupola/beeper.svg)](https://packagist.org/packages/tuupola/beeper)
+[![Build Status](https://img.shields.io/github/workflow/status/tuupola/beeper/Tests/3.x?style=flat-square)](https://github.com/tuupola/beeper/actions)
+[![Coverage](https://img.shields.io/codecov/c/github/tuupola/beeper.svg?style=flat-square)](https://codecov.io/github/tuupola/beeper)
 
 ## Install
 
