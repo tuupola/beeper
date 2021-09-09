@@ -30,7 +30,7 @@ class SpotAdapter implements AdapterInterface
     {
         /* This works also with GROUP BY queries. */
         $query = clone $this->query;
-        return count($query->execute());
+        return $query->count();
     }
 
     public function slice(array $options)
