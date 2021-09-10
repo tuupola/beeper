@@ -57,10 +57,9 @@ Array
 ```
 
 ```php
-$beeper
-    ->rewind()
-    ->next()
-    ->next();
+$beeper->rewind();
+$beeper->next();
+$beeper->next();
 
 print_r($beeper->get());
 ```
