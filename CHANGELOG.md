@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## [0.4.0](https://github.com/tuupola/beeper/compare/0.3.1...master) - unreleased
+## [0.4.0](https://github.com/tuupola/beeper/compare/0.3.1...0.4.0) - 2021-09-10
 ### Added
 - Static analysis ([#6](https://github.com/tuupola/beeper/pull/6]))
 - Adapter for `league/fractal`
