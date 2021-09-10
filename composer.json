@@ -1,7 +1,7 @@
 {
     "name": "tuupola/beeper",
     "type": "library",
-    "description": "Generic paginator for PHP 5.4+",
+    "description": "Generic paginator for PHP 7.1+",
     "keywords": ["pager", "pagination", "paginator"],
     "homepage": "https://github.com/tuupola/beeper",
     "license": "MIT",
