@@ -14,13 +14,11 @@ class BeeperPaginatorAdapter implements PaginatorInterface
 {
     /**
      * The paginator
-     * @var object
      */
-    protected $paginator;
+    protected Beeper $paginator;
 
     /**
      * Setup our adapter
-     * @param Beeper $paginator
      */
     public function __construct(Beeper $paginator)
     {
@@ -29,18 +27,16 @@ class BeeperPaginatorAdapter implements PaginatorInterface
 
     /**
      * Get current page being viewed
-     * @return integer
      */
-    public function getCurrentPage()
+    public function getCurrentPage(): int
     {
-        return $this->paginator->getPage();
+        return $this->paginator->page();
     }
 
     /**
      * Get last page
-     * @return string
      */
-    public function getLastPage()
+    public function getLastPage(): int
     {
         return count($this->paginator);
         // return $this->paginator->getTotal();
@@ -48,18 +44,16 @@ class BeeperPaginatorAdapter implements PaginatorInterface
 
     /**
      * Get total number of items
-     * @return integer
      */
-    public function getTotal()
+    public function getTotal(): int
     {
-        return $this->paginator->getTotal();
+        return $this->paginator->total();
     }
 
     /**
      * Get number of pages
-     * @return integer
      */
-    public function getCount()
+    public function getCount(): int
     {
         return count($this->paginator);
         //return $this->paginator->count();
@@ -67,19 +61,17 @@ class BeeperPaginatorAdapter implements PaginatorInterface
 
     /**
      * Get per page
-     * @return integer
      */
-    public function getPerPage()
+    public function getPerPage(): int
     {
-        return $this->paginator->getSize();
+        return $this->paginator->size();
     }
 
     /**
      * Get url for the given page
      * @param  integer $page
-     * @return string
      */
-    public function getUrl($page)
+    public function getUrl($page): string
     {
         return "page={$page}";
     }

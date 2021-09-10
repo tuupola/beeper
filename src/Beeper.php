@@ -17,15 +17,21 @@ namespace Beeper;
 
 use Beeper\Adapter\AdapterInterface;
 
+/**
+ * @template TSlice
+ * @implements \Iterator<int, TSlice>
+ */
 class Beeper implements \Iterator, \Countable
 {
-    private $options;
-    private $adapter;
-    private $total;
-    private $size;
-    private $page; /* \Iterator already uses current() */
+    private AdapterInterface $adapter;
+    private int $total;
+    private int $size;
+    private int $page; /* \Iterator already uses current() */
 
-    public function __construct(array $options = [])
+    /**
+     * @param array{"adapter": AdapterInterface, "page": int, "size": int} $options
+    */
+    public function __construct(array $options)
     {
         $this->adapter = $options["adapter"];
         $this->page = $options["page"] ?? 1;
@@ -33,7 +39,10 @@ class Beeper implements \Iterator, \Countable
         $this->total = $this->adapter->count();
     }
 
-    public function get($page = null)
+    /**
+     * @return TSlice
+     */
+    public function get(int $page = null)
     {
         if (null === $page) {
             $page = $this->page;
@@ -43,37 +52,33 @@ class Beeper implements \Iterator, \Countable
         return $this->adapter->slice(["offset" => $offset, "limit" => $limit]);
     }
 
-    public function previous()
+    public function previous(): int
     {
-        --$this->page;
-        return $this;
+        return --$this->page;
     }
 
-    public function page($page = null)
+    public function page(int $page = null): int
     {
-        if (null === $page) {
-            return $this->page;
+        if (null !== $page) {
+            $this->page = $page;
         }
-        $this->page = $page;
-        return $this;
+        return $this->page;
     }
 
-    public function total($total = null)
+    public function total(int $total = null): int
     {
-        if (null === $total) {
-            return $this->total;
+        if (null !== $total) {
+            $this->total = $total;
         }
-        $this->total = $total;
-        return $this;
+        return $this->total;
     }
 
-    public function size($size = null)
+    public function size(int $size = null): int
     {
-        if (null === $size) {
-            return $this->size;
+        if (null !== $size) {
+            $this->size = $size;
         }
-        $this->size = $size;
-        return $this;
+        return $this->size;
     }
 
     /* Countable */
@@ -85,26 +90,30 @@ class Beeper implements \Iterator, \Countable
     /* Iterator */
 
     /* Return the current element */
+    /**
+     * @return TSlice
+     */
     public function current()
     {
         return $this->get();
     }
 
     /* Return the key of the current element */
-    public function key()
+    public function key(): int
     {
         return $this->page;
     }
 
     /* Move forward to next element */
-    public function next()
+    public function next(): self
     {
         ++$this->page;
         return $this;
     }
 
     /* Rewind the Iterator to the first element */
-    public function rewind()
+    /** @return Beeper */
+    public function rewind(): self
     {
         $this->page = 1;
         return $this;
