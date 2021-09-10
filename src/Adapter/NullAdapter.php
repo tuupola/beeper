@@ -21,7 +21,10 @@ namespace Beeper\Adapter;
 class NullAdapter implements AdapterInterface
 {
 
-    private array $collection;
+    /**
+     * @var array
+     */
+    private $collection;
 
     public function __construct(array $collection = [])
     {

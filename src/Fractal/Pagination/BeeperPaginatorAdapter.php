@@ -14,8 +14,9 @@ class BeeperPaginatorAdapter implements PaginatorInterface
 {
     /**
      * The paginator
+     * @var Beeper
      */
-    protected Beeper $paginator;
+    protected $paginator;
 
     /**
      * Setup our adapter

@@ -22,7 +22,10 @@ use Spot\Query as SpotQuery;
  */
 class SpotAdapter implements AdapterInterface
 {
-    private SpotQuery $query;
+    /**
+     * @var SpotQuery
+     */
+    private $query;
 
     public function __construct(SpotQuery $query)
     {

@@ -23,14 +23,26 @@ use Beeper\Adapter\AdapterInterface;
  */
 class Beeper implements \Iterator, \Countable
 {
-    private AdapterInterface $adapter;
-    private int $total;
-    private int $size;
-    private int $page; /* \Iterator already uses current() */
+    /**
+     * @var AdapterInterface
+     */
+    private $adapter;
+    /**
+     * @var int
+     */
+    private $total;
+    /**
+     * @var int
+     */
+    private $size;
+    /**
+     * @var int
+     */
+    private $page; /* \Iterator already uses current() */
 
     /**
      * @param array{"adapter": AdapterInterface, "page": int, "size": int} $options
-    */
+     */
     public function __construct(array $options)
     {
         $this->adapter = $options["adapter"];

@@ -20,7 +20,10 @@ namespace Beeper\Adapter;
  */
 class ArrayAdapter implements AdapterInterface
 {
-    private array $collection;
+    /**
+     * @var array
+     */
+    private $collection;
 
     public function __construct(array $collection)
     {
