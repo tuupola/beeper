@@ -15,8 +15,15 @@
 
 namespace Beeper\Adapter;
 
+/**
+ * @template TSlice
+ */
 class NullAdapter implements AdapterInterface
 {
+
+    /**
+     * @var array
+     */
     private $collection;
 
     public function __construct(array $collection = [])
@@ -24,12 +31,12 @@ class NullAdapter implements AdapterInterface
         $this->collection = $collection;
     }
 
-    public function count()
+    public function count(): int
     {
         return 0;
     }
 
-    public function slice(array $options)
+    public function slice(array $options): array
     {
         return [];
     }

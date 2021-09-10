@@ -15,9 +15,15 @@
 
 namespace Beeper\Adapter;
 
+/**
+ * @template TSlice
+ */
 interface AdapterInterface
 {
-    public function count();
+    public function count(): int;
 
+    /**
+     * @return TSlice
+     */
     public function slice(array $options);
 }

@@ -15,27 +15,37 @@
 
 namespace Beeper\Adapter;
 
+use Spot\Query as SpotQuery;
+
+/**
+ * @template TSlice
+ */
 class SpotAdapter implements AdapterInterface
 {
+    /**
+     * @var SpotQuery
+     */
     private $query;
-    private $options;
-    private $total;
 
-    public function __construct($query)
+    public function __construct(SpotQuery $query)
     {
         $this->query = $query;
     }
 
-    public function count()
+    public function count(): int
     {
         /* This works also with GROUP BY queries. */
         $query = clone $this->query;
         return count($query->execute());
     }
 
-    public function slice(array $options)
+    /**
+     * @param array{"limit": int, "offset": int} $options
+     */
+    public function slice(array $options): SpotQuery
     {
-        extract($options);
+        $limit = $options["limit"];
+        $offset = $options["offset"];
         return $this->query->limit($limit, $offset);
     }
 }

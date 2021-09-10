@@ -94,7 +94,9 @@ class BeeperTest extends TestCase
         $array = range(1, 55, 1);
         $adapter = new ArrayAdapter($array);
         $beeper = new Beeper(["adapter" => $adapter, "page" => 5]);
-        $page = $beeper->previous()->previous()->page();
+        $beeper->previous();
+        $beeper->previous();
+        $page = $beeper->page();
         $this->assertEquals($page, 3);
     }
 
@@ -103,7 +105,10 @@ class BeeperTest extends TestCase
         $array = range(1, 55, 1);
         $adapter = new ArrayAdapter($array);
         $beeper = new Beeper(["adapter" => $adapter, "page" => 5]);
-        $page = $beeper->previous()->previous()->rewind()->page();
+        $beeper->previous();
+        $beeper->previous();
+        $beeper->rewind();
+        $page = $beeper->page();
         $this->assertEquals($page, 1);
     }
 
