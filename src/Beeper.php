@@ -113,7 +113,7 @@ class Beeper implements \Iterator, \Countable
     /**
      * @return int
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return (integer)ceil($this->total / $this->size);
@@ -125,7 +125,7 @@ class Beeper implements \Iterator, \Countable
     /**
      * @return TSlice
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->get();
@@ -141,7 +141,7 @@ class Beeper implements \Iterator, \Countable
     /**
      * @return self
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function next(): self
     {
         ++$this->page;
@@ -150,7 +150,7 @@ class Beeper implements \Iterator, \Countable
 
     /* Rewind the Iterator to the first element */
     /** @return Beeper */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function rewind(): self
     {
         $this->page = 1;
@@ -161,7 +161,7 @@ class Beeper implements \Iterator, \Countable
     /**
      * @return bool
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->page > 0 && $this->page <= $this->count();
