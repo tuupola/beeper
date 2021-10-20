@@ -110,7 +110,7 @@ class Beeper implements \Iterator, \Countable
     }
 
     /* Countable */
-    public function count(): int
+    public function count()
     {
         return (integer)ceil($this->total / $this->size);
     }
@@ -121,7 +121,7 @@ class Beeper implements \Iterator, \Countable
     /**
      * @return TSlice
      */
-    public function current(): mixed
+    public function current()
     {
         return $this->get();
     }
@@ -148,7 +148,7 @@ class Beeper implements \Iterator, \Countable
     }
 
     /* Checks if current position is valid */
-    public function valid(): bool
+    public function valid()
     {
         return $this->page > 0 && $this->page <= $this->count();
     }
