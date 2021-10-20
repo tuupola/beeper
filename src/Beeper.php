@@ -110,6 +110,9 @@ class Beeper implements \Iterator, \Countable
     }
 
     /* Countable */
+    /**
+     * @return int
+     */
     #[ReturnTypeWillChange]
     public function count()
     {
@@ -135,6 +138,9 @@ class Beeper implements \Iterator, \Countable
     }
 
     /* Move forward to next element */
+    /**
+     * @return self
+     */
     #[ReturnTypeWillChange]
     public function next(): self
     {
@@ -152,6 +158,9 @@ class Beeper implements \Iterator, \Countable
     }
 
     /* Checks if current position is valid */
+    /**
+     * @return bool
+     */
     #[ReturnTypeWillChange]
     public function valid()
     {
