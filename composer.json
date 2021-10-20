@@ -20,7 +20,7 @@
         "overtrue/phplint": "^1.0|^2.0",
         "squizlabs/php_codesniffer": "^3.4",
         "league/fractal": "^0.15.0",
-        "phpstan/phpstan": "^0.12.98"
+        "phpstan/phpstan": "^0.12.99"
     },
     "suggest": {
         "vlucas/spot2": "Allows running Spot tests"
